@@ -12,7 +12,7 @@ function graphQLFetcher(graphQLParams) {
 }
 
 const QUERY = `
-  {
+  query Events {
     events {
       date
       name
