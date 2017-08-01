@@ -7,17 +7,17 @@ function graphQLFetcher(graphQLParams) {
   return fetch('https://w1z9m133z.lp.gql.zone/graphql', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(graphQLParams)
+    body: JSON.stringify(graphQLParams),
   }).then(response => response.json());
 }
 
 const QUERY = `
   query Events {
     events {
-      date
+      time
       name
       description
-      upcoming
+      status
       link
     }
   }
@@ -30,15 +30,15 @@ const Section = glamorous.div({
   alignItems: 'center',
   flex: 1,
   '@media(max-width: 768px)': {
-    display: 'none'
-  }
+    display: 'none',
+  },
 });
 
 const GraphiQLContainer = glamorous.div({
   width: '100%',
   maxWidth: '1280px',
   padding: '20px',
-  minHeight: '400px'
+  minHeight: '400px',
 });
 
 export default () =>

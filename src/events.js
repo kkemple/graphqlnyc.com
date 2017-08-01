@@ -1,14 +1,15 @@
 import React from 'react';
 import glamorous from 'glamorous';
 import { gql, graphql } from 'react-apollo';
+import { format } from 'date-fns';
 
 const QUERY = gql`
   query Events {
     events {
-      date
+      time
       name
       description
-      upcoming
+      status
       link
     }
   }
@@ -17,8 +18,8 @@ const QUERY = gql`
 const Section = glamorous.div({
   width: '100%',
   '@media(min-width: 768px)': {
-    display: 'none'
-  }
+    display: 'none',
+  },
 });
 
 const Event = glamorous.div({
@@ -30,12 +31,12 @@ const Event = glamorous.div({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'flex-start',
-  alignItems: 'stretch'
+  alignItems: 'stretch',
 });
 
 const EventDetail = glamorous.div({
   color: '#e535ab',
-  marginBottom: '4px'
+  marginBottom: '4px',
 });
 
 const ErrorView = glamorous.div({
@@ -44,7 +45,7 @@ const ErrorView = glamorous.div({
   borderRadius: '3px',
   boxShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
   padding: '10px',
-  marginBottom: '15px'
+  marginBottom: '15px',
 });
 
 const Loading = glamorous.h2({
@@ -53,33 +54,37 @@ const Loading = glamorous.h2({
   borderRadius: '3px',
   boxShadow: '0 2px 10px rgba(0, 0, 0, 0.3)',
   padding: '10px',
-  marginBottom: '15px'
+  marginBottom: '15px',
 });
 
 const Events = ({ data, loading, error }) =>
   <Section>
+    {error &&
+      <ErrorView>
+        {error}
+      </ErrorView>}
     {loading && <Loading>Loading ...</Loading>}
     {data.events &&
       data.events.map(event =>
-        <Event key={event.date}>
+        <Event key={event.time}>
           <EventDetail>
-            {event.date}
+            {event.name}
           </EventDetail>
           <EventDetail>
-            {event.title}
+            {format(parseInt(event.time, 10), 'YYYY-MM-DD')}
           </EventDetail>
           <EventDetail>
-            {event.description}
-          </EventDetail>
-          <EventDetail>
-            {event.upcoming ? 'Upcoming' : ''}
+            {event.status.toUpperCase()}
           </EventDetail>
           <EventDetail>
             <a href={event.link}>
               {event.link}
             </a>
           </EventDetail>
-        </Event>
+          <EventDetail>
+            <div dangerouslySetInnerHTML={{ __html: event.description }} />
+          </EventDetail>
+        </Event>,
       )}
   </Section>;
 

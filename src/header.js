@@ -10,8 +10,8 @@ const Header = glamorous.div({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'stretch',
-    marginBottom: '40px'
-  }
+    marginBottom: '40px',
+  },
 });
 
 const Menu = glamorous.ul({
@@ -23,13 +23,13 @@ const Menu = glamorous.ul({
   alignItems: 'center',
   '@media(max-width: 768px)': {
     justifyContent: 'space-around',
-    flexWrap: 'wrap'
-  }
+    flexWrap: 'wrap',
+  },
 });
 
 const MenuItem = glamorous.li({
   paddingLeft: '10px',
-  paddingRight: '10px'
+  paddingRight: '10px',
 });
 
 const Link = glamorous.a({
@@ -39,19 +39,19 @@ const Link = glamorous.a({
   cursor: 'pointer',
   textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
   ':hover': {
-    textDecoration: 'underline'
+    textDecoration: 'underline',
   },
   '@media(max-width: 768px)': {
-    fontSize: '20px'
-  }
+    fontSize: '20px',
+  },
 });
 
 const Title = glamorous.h1({
   color: 'white',
   textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
   '@media(max-width: 768px)': {
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });
 
 export default () =>
@@ -72,6 +72,16 @@ export default () =>
       </MenuItem>
       <MenuItem>
         <Link href="https://github.com/graphql/graphql-js/">Contribute</Link>
+      </MenuItem>
+      <MenuItem>
+        <Link href="https://docs.google.com/forms/d/1RvQDiUAmG-hz4nAAZ3wr7_RykzWqa9t6h4y0LfDZZaE">
+          Submit a Talk
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <Link href="https://join.slack.com/t/graphqlnyc/shared_invite/MjEyOTM4ODU5NjgxLTE1MDAyMTA5NDAtNTJmZDlhM2EyZQ">
+          Join Chat
+        </Link>
       </MenuItem>
     </Menu>
   </Header>;
